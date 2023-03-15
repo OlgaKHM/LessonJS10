@@ -1,0 +1,95 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #022237;
+  background-image: url("./img/fon.png");
+  background-color: rgba(118, 185, 208, 0.441);
+}
+
+.wrapper {
+  max-width: 1950px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.412);
+  box-shadow: 0 0 20px white;
+}
+
+h1 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  text-align: center;
+  color: #089fc1;
+}
+
+h2 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  color: #03c2af;
+
+  padding-left: 50px;
+}
+
+h3 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  color: #01aab3;
+
+  text-align: center;
+}
+
+ol li {
+  padding: 5px 15px;
+  margin-bottom: 10px;
+}
+
+ul li,
+td,
+.tekst {
+  padding: 5px 15px;
+  color: #022237;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+table {
+  display: inline-flex;
+}
+td,
+table {
+  border: 1px solid #04046d;
+}
+table,
+.tekst {
+  text-align: center;
+}
+td {
+  background-color: rgba(255, 255, 255, 0.533);
+}
+
+p {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 20px rgb(255, 255, 255);
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #022237;
+}
+
+a:hover {
+  color: #0391b1;
+  text-shadow: 0 0 5px #07d6f2;
+}
+
+p {
+  margin-top: 10px;
+}
+span {
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 150%;
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@800&family=Montserrat:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Домашне завдання 10</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h1>Домашне завдання 10</h1>
+      <h3>
+        Дано історію цін на цінні папери за деякий період (згенерувати від 1 до
+        10000)
+      </h3>
+      <ol>
+        <li>
+          Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.
+        </li>
+        <li>
+          Сформувати новий масив, у якому є номери тільки тих, що більші за 1000
+          грн.
+        </li>
+        <li>Сформувати список з тих цін, які більші за попереднє значення.</li>
+        <li>
+          Сформувати новий масив, що міститиме значення цін у відсотках стосовно
+          максимального.
+        </li>
+        <li>Підрахувати кількість змін цін.</li>
+        <li>Визначити, чи є ціна, що менше 1000.</li>
+        <li>Визначати, чи усі ціни більше за 1000.</li>
+        <li>Підрахувати кількість цін, що більше за 1000.</li>
+        <li>Підрахувати суму цін, що більше за 1000.</li>
+        <li>Знайти першу ціну, що більше за 1000.</li>
+        <li>Знайти індекс першої ціни, що більше за 1000.</li>
+        <li>Знайти останню ціну, що більше за 1000.</li>
+        <li>Знайти індекс останньої ціни, що більше за 1000.</li>
+      </ol>
+      <script>
+        //ввести данні
+        const numberOfElements = parseInt(
+          prompt("Введіть тривалість періоду історії цін", "")
+        );
+        const minPreis = 1;
+        const maxPreis = 10000;
+
+        function getRandomPriceHistory() {
+          const arrPriceHistory = [];
+          for (let i = 0; i < numberOfElements; i++) {
+            let randomItem = Math.floor(
+              Math.random() * (maxPreis - minPreis) + minPreis
+            );
+            arrPriceHistory.push(randomItem);
+          }
+          return arrPriceHistory;
+        }
+        const priceHistory = getRandomPriceHistory(
+          minPreis,
+          maxPreis,
+          numberOfElements
+        );
+        document.write("<table><tbody>");
+        document.write(
+          `<tr><td>історія цін:</td><td>${priceHistory}</td></tr>`
+        );
+
+        //1 новий масив, у якому є тільки ті, що більші за 1000 грн.
+        const priceHistoryMore1000 = priceHistory.filter(
+          (preice) => preice > 1000
+        );
+        document.write(
+          `<tr><td>ціни, що більші за 1000 грн.:</td><td>${priceHistoryMore1000}</td></tr>`
+        );
+
+        //2 новий масив, у якому є номери тільки тих, що більші за 1000.
+        const priceIndexMore1000 = priceHistory.reduce(
+          (priceIndex, preice, index) => {
+            if (preice > 1000) priceIndex.push(index);
+            return priceIndex;
+          },
+          []
+        );
+        document.write(
+          `<tr><td>номери цін, що більші за 1000 грн.:</td><td>${priceIndexMore1000}</td></tr>`
+        );
+
+        //3 список з тих цін, які більші за попереднє значення.
+        const priceHistoryMorePrwvious = priceHistory.reduce(
+          (priceIndex, preice, index, arrRef) => {
+            if (arrRef[index - 1] < arrRef[index]) priceIndex.push(preice);
+            return priceIndex;
+          },
+          []
+        );
+        document.write(
+          `<tr><td>ціни, які більші за попереднє значення:</td><td>${priceHistoryMorePrwvious}</td></tr>`
+        );
+
+        //4 новий масив, що міститиме значення цін у відсотках стосовно максимального
+        const priceMax = priceHistory.reduce(
+          (price, priceMax) => (price < priceMax ? priceMax : price),
+          1
+        );
+        const pricePercentOfMax = priceHistory.map(
+          (preice) => ((preice / priceMax) * 100).toFixed(2) + "%"
+        );
+        document.write(
+          `<tr><td>новий масив, що міститиме значення цін у відсотках стосовно максимального:</td><td>${pricePercentOfMax}</td></tr>`
+        );
+
+        //5 кількість змін цін
+        const numberOfPriceChange = priceHistory.reduce(
+          (prevPrice, preice) =>
+            preice !== prevPrice ? prevPrice + 1 : prevPrice,
+          0
+        );
+        document.write(
+          `<tr><td>кількість змін цін:</td><td>${numberOfPriceChange}</td></tr>`
+        );
+
+        //6 Визначити, чи є ціна, що менше 1000
+        const priceLessThan1000 = priceHistory.some((preice) => preice < 1000);
+        let result;
+        if (priceLessThan1000 === true) result = "ТАК";
+        else result = "НІ";
+        document.write(
+          `<tr><td>чи є ціна, що менше 1000:</td><td>${result}</td></tr>`
+        );
+
+        // 7 чи усі ціни більше за 1000
+        const priceAllOver1000 = priceHistory.every((preice) => preice > 1000);
+        if (priceAllOver1000 === true) result = "ТАК";
+        else result = "НІ";
+        document.write(
+          `<tr><td>чи усі ціни більше за 1000:</td><td>${result}</td></tr>`
+        );
+
+        //8 Підрахувати кількість цін, що більше за 1000
+        const numberOfPriceOver1000 = priceHistory.reduce(
+          (prevNumberOfPriceOver1000, preice) =>
+            preice > 1000
+              ? prevNumberOfPriceOver1000 + 1
+              : prevNumberOfPriceOver1000,
+          0
+        );
+        document.write(
+          `<tr><td>кількість цін, що більше за 1000:</td><td>${numberOfPriceOver1000}</td></tr>`
+        );
+
+        // 9 Підрахувати суму цін, що більше за 1000
+        const sumOfPriceOver1000 = priceHistory.reduce(
+          (prevSumOfPriceOver1000, preice) =>
+            preice > 1000
+              ? prevSumOfPriceOver1000 + preice
+              : prevSumOfPriceOver1000,
+          0
+        );
+        document.write(
+          `<tr><td>сума цін, що більше за 1000:</td><td>${sumOfPriceOver1000}</td></tr>`
+        );
+
+        // 10 Знайти першу ціну, що більше за 1000
+        const firstPriceOver1000 = priceHistory.find((preice) => preice > 1000);
+        document.write(
+          `<tr><td>перша ціна, що більше за 1000:</td><td>${firstPriceOver1000}</td></tr>`
+        );
+
+        // 11 Знайти індекс першої ціни, що більше за 1000
+        const firstIndexOver1000 = priceHistory.findIndex(
+          (preice, index) => preice > 1000
+        );
+        document.write(
+          `<tr><td>індекс першої ціни, що більше за 1000:</td><td>${firstIndexOver1000}</td></tr>`
+        );
+
+        // 12 Знайти останню ціну, що більше за 1000
+        const lastPriceOver1000 = priceHistory.findLast(
+          (preice) => preice > 1000
+        );
+        document.write(
+          `<tr><td>остання ціна, що більше за 1000:</td><td>${lastPriceOver1000}</td></tr>`
+        );
+
+        // 13 Знайти індекс останньої ціни, що більше за 1000
+        const lastIndexOver1000 = priceHistory.findLastIndex(
+          (preice, index) => preice > 1000
+        );
+        document.write(
+          `<tr><td>індекс останньої ціни, що більше за 1000:</td><td>${lastIndexOver1000}</td></tr>`
+        );
+
+        document.write("</tbody></table>");
+      </script>
+    </div>
+  </body>
+</html>
